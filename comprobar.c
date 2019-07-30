@@ -143,6 +143,17 @@ int comprobarVictoria(int TABLERO[FIL][COL]){
     return 0;
 }
 
+int comprobarTablero(int TABLERO[FIL][COL]){
+    for (int i = 0; i < FIL; i++){
+        for (int j = 0; j < COL; j++){
+            if (TABLERO[i][j] != 0){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
 void posAyudaRandom(int TABLERO[FIL][COL], int cont){
     //srand(time(NULL));
     srand(getpid());

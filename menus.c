@@ -18,6 +18,7 @@ int comprobarColumna(int [FIL][COL], int, int);
 int comprobarCuadrantes(int [FIL][COL], int, int, int);
 int comprobarFCC (int [FIL][COL], int, int, int);
 int comprobarVictoria(int [FIL][COL]);
+int comprobarTablero(int [FIL][COL]);
 void clearScreen(void);
 void redColor(void);
 void greenColor(void);
@@ -37,7 +38,7 @@ int menuBienvenida(int TABLERO[FIL][COL], int cont, int dificultad){
     printf("\n1 - Easy\n");
     printf("2 - Medium\n");
     printf("3 - Hard\n");
-    if (comprobarVictoria(TABLERO) != 0){
+    if (comprobarTablero(TABLERO) != 0){
         printf("\n4 - Volver al Menu Principal\n");
     }
     else printf("\n");
