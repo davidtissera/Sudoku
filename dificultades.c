@@ -14,11 +14,8 @@
 extern int SOLUCION[FIL][COL];
 extern int COPY[FIL][COL];
 
-int sumE = 0;
-int sumM = 0;
-int sumH = 0;
-
 void easySudoku (int TABLERO[FIL][COL]){
+    static sumE = 0;
     for (int i = 0; i < FIL; i++){
         for (int j = 0; j < COL; j++){
             TABLERO[i][j] = EASY_WIN[sumE][i][j];
@@ -31,6 +28,7 @@ void easySudoku (int TABLERO[FIL][COL]){
 }
 
 void mediumSudoku(int TABLERO[FIL][COL]){
+    static sumM = 0;
     for (int i = 0; i < FIL; i++){
         for (int j = 0; j < COL; j++){
             TABLERO[i][j] = MEDIUM_ALL[sumM][i][j];
@@ -43,6 +41,7 @@ void mediumSudoku(int TABLERO[FIL][COL]){
 }
 
 void hardSudoku (int TABLERO[FIL][COL]){
+    static sumH = 0;
     for (int i = 0; i < FIL; i++){
         for (int j = 0; j < COL; j++){
             TABLERO[i][j] = HARD_ALL[sumH][i][j];
