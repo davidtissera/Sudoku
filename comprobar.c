@@ -23,88 +23,18 @@ int comprobarColumna(int TABLERO[FIL][COL], int col, int num){
             return 1;
         }
     }
+    
     return 0;
 }
 
 int comprobarCuadrantes(int TABLERO[FIL][COL], int fil, int col, int num){
-    if (fil-1 < FIL/3 && col-1 < COL/3){
-        for (int i = 0; i < FIL/3; i++){
-            for (int j = 0; j < COL/3; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil-1 < FIL/3 && col > COL/3 && col-1 < COL-3){
-        for (int i = 0; i < FIL/3; i++){
-            for (int j = COL/3; j < COL-3; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil-1 < FIL/3 && col > COL-3 && col-1 < COL){
-        for (int i = 0; i < FIL/3; i++){
-            for (int j = COL-3; j < COL; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil > FIL/3 && fil-1 < FIL-3 && col-1 < COL/3){
-        for (int i = FIL/3; i < FIL-3; i++){
-            for (int j = 0; j < COL/3; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil > FIL/3 && fil < FIL-3 && col > COL/3 && col-1 < COL-3){
-        for (int i = FIL/3; i < FIL-3; i++){
-            for (int j = COL/3; j < COL-3; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil > FIL/3 && fil-1 < FIL-3 && col > COL-3 && col-1 < COL){
-        for (int i = FIL/3; i < FIL-3; i++){
-            for (int j = COL-3; j < COL; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil > FIL-3 && fil-1 < FIL && col-1 < COL/3){
-        for (int i = FIL-3; i < FIL; i++){
-            for (int j = 0; j < COL/3; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil > FIL-3 && fil-1 < FIL && col > COL/3 && col-1 < COL-3){
-        for (int i = FIL-3; i < FIL; i++){
-            for (int j = COL/3; j < COL-3; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
-            }
-        }
-    }
-    if (fil > FIL-3 && fil-1 < FIL && col > COL-3 && col-1 < COL){
-        for (int i = FIL-3; i < FIL; i++){
-            for (int j = COL-3; j < COL; j++){
-                if (TABLERO[i][j] == num){
-                    return 1;
-                }
+    int x, y;
+    x = (fil-1)/3;
+    y = (col-1)/3;
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3;j++){
+            if (TABLERO[3 * x+i][3 * y+j] == num){
+                return 1;
             }
         }
     }
@@ -155,29 +85,20 @@ int comprobarTablero(int TABLERO[FIL][COL]){
 }
 
 void posAyudaRandom(int TABLERO[FIL][COL], int cont){
-    //srand(time(NULL));
     srand(getpid());
-    //se define un Array en donde se guardaran coordenadas
     int A[81], k = 0;
     for (int i = 0; i < FIL; i++){
         for (int j = 0; j < COL; j++){
-            //Se guardan las coordenadas de los numeros que tengan 0 en la matriz
             if (COPY[i][j] == 0){
-                //se codifican ambos numeros en uno solo
                 A[k] = (i*10)+j;
                 k++;
             }
         }
     }
     int cord = A[rand() % k];
-    //se decodifica el numero correspondiente a la fila
     int x = cord / 10;
-    //se decodifica el numero correspondiente a la columna
     int y = cord % 10;
-    //se reemplaza el valor de la matriz de trabajo con el correspondiente en esa coordenada de la matriz solucion
     TABLERO[x][y] = SOLUCION[x][y];
-    //se reemplaza el valor de la matriz copia con el correspondiente en esa coordenada de la matriz solucion
-    //para no volver a evaluar en la proxima llamada a la funcion sobre ese casillero que ya no tendra un 0.
     COPY[x][y] = SOLUCION[x][y];
     printf("\nLa ayuda fue otorgada en la posicion: [%d][%d]\n", x+1, y+1);
 }
