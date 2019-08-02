@@ -26,7 +26,7 @@ void yellowColor(void);
 void resetColor(void);
 
 extern int SOLUCION[FIL][COL];
-extern int COPY[FIL][COL];
+extern int COPIA[FIL][COL];
 
 int menuBienvenida(int TABLERO[FIL][COL], int cont, int dificultad){
     char option = '1'; clearScreen();
@@ -190,7 +190,7 @@ void validarCarga (int TABLERO[FIL][COL], int cont, int dificultad, char query){
             sleep(1);
             break;
         }
-        if (COPY[fil-1][col-1] != 0){
+        if (COPIA[fil-1][col-1] != 0){
             printf("\nERROR!!! el casillero no es modificable\n");
             sleep(1);
             break;
@@ -208,7 +208,7 @@ void validarCarga (int TABLERO[FIL][COL], int cont, int dificultad, char query){
         else {
             TABLERO[fil-1][col-1] = num;
             if (TABLERO[fil-1][col-1] == SOLUCION[fil-1][col-1]){
-                COPY[fil-1][col-1] = num;
+                COPIA[fil-1][col-1] = num;
             }
         }
         break;

@@ -5,7 +5,7 @@
 #include "macros.h"
 
 extern int SOLUCION[FIL][COL];
-extern int COPY[FIL][COL];
+extern int COPIA[FIL][COL];
 
 int comprobarFila(int TABLERO[FIL][COL], int fil, int num){
     for (int i = 0; i < COL; i++){
@@ -23,7 +23,7 @@ int comprobarColumna(int TABLERO[FIL][COL], int col, int num){
             return 1;
         }
     }
-    
+
     return 0;
 }
 
@@ -32,8 +32,8 @@ int comprobarCuadrantes(int TABLERO[FIL][COL], int fil, int col, int num){
     x = (fil-1)/3;
     y = (col-1)/3;
     for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3;j++){
-            if (TABLERO[3 * x+i][3 * y+j] == num){
+        for (int j = 0; j < 3; j++){
+            if (TABLERO[3*x+i][3*y+j] == num){
                 return 1;
             }
         }
@@ -89,7 +89,7 @@ void posAyudaRandom(int TABLERO[FIL][COL], int cont){
     int A[81], k = 0;
     for (int i = 0; i < FIL; i++){
         for (int j = 0; j < COL; j++){
-            if (COPY[i][j] == 0){
+            if (COPIA[i][j] == 0){
                 A[k] = (i*10)+j;
                 k++;
             }
@@ -99,6 +99,6 @@ void posAyudaRandom(int TABLERO[FIL][COL], int cont){
     int x = cord / 10;
     int y = cord % 10;
     TABLERO[x][y] = SOLUCION[x][y];
-    COPY[x][y] = SOLUCION[x][y];
+    COPIA[x][y] = SOLUCION[x][y];
     printf("\nLa ayuda fue otorgada en la posicion: [%d][%d]\n", x+1, y+1);
 }
