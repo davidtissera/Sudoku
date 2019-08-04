@@ -84,7 +84,7 @@ int comprobarTablero(int TABLERO[FIL][COL]){
     return 0;
 }
 
-void posAyudaRandom(int TABLERO[FIL][COL], int cont){
+int posAyudaRandom(int TABLERO[FIL][COL], int cont){
     srand(getpid());
     int A[81], k = 0;
     for (int i = 0; i < FIL; i++){
@@ -100,5 +100,6 @@ void posAyudaRandom(int TABLERO[FIL][COL], int cont){
     int y = cord % 10;
     TABLERO[x][y] = SOLUCION[x][y];
     COPIA[x][y] = SOLUCION[x][y];
-    printf("\nLa ayuda fue otorgada en la posicion: [%d][%d]\n", x+1, y+1);
+
+    return cord;
 }

@@ -8,7 +8,7 @@ void menuPrincipal(int [FIL][COL], int, int);
 void menuAyuda (int [FIL][COL], int, int);
 void menuCargar(int [FIL][COL], int, int);
 void validarCarga (int [FIL][COL], int, int, char);
-void posAyudaRandom (int [FIL][COL], int);
+int posAyudaRandom (int [FIL][COL], int);
 void easySudoku (int [FIL][COL]);
 void mediumSudoku (int [FIL][COL]);
 void hardSudoku (int [FIL][COL]);
@@ -38,7 +38,7 @@ int menuBienvenida(int TABLERO[FIL][COL], int cont, int dificultad){
     printf("\n1 - Easy\n");
     printf("2 - Medium\n");
     printf("3 - Hard\n");
-    if (comprobarTablero(TABLERO) != 0){
+    if (comprobarTablero(TABLERO) == 1){
         printf("\n4 - Volver al Menu Principal\n");
     }
     else printf("\n");
@@ -64,23 +64,15 @@ int menuBienvenida(int TABLERO[FIL][COL], int cont, int dificultad){
             hardSudoku(TABLERO);
             menuPrincipal(TABLERO, cont, dificultad);
         }
-        else if (option == '4'){
-            if (comprobarVictoria(TABLERO) != 0){
-                menuPrincipal(TABLERO, cont, dificultad);
-            }
-            else {
-                printf("\nOpcion no valida\n");
-                sleep(1);
-                menuBienvenida(TABLERO, cont, dificultad);
-
-            }
+        else if (option == '4' && comprobarTablero(TABLERO) == 1 && comprobarVictoria(TABLERO) == 1){
+            menuPrincipal(TABLERO, cont, dificultad);
         }
         else if (option == '5'){
             int query;
             printf("\nEsta seguro que desea salir de SUDOKU?\n");
             printf("Si sale se perdera toda la informacion cargada\n");
             printf("Responda SI");greenColor();printf(" [1]");resetColor();
-            printf(" o NO");redColor();printf(" [0]: ");resetColor();
+            printf(" o NO");redColor();printf(" [0]");resetColor();printf(": ");
             scanf("%d", &query);
             if (query == 1){
                 return 0;
@@ -132,7 +124,7 @@ void menuPrincipal(int TABLERO[FIL][COL], int cont, int dificultad){
         }
     }
     else {
-        printf("\nOpcion no valida, ingrese un entero");
+        printf("\nOpcion no valida, ingrese un entero\n");
         sleep(1);
         menuPrincipal(TABLERO, cont, dificultad);
     }
@@ -216,9 +208,13 @@ void validarCarga (int TABLERO[FIL][COL], int cont, int dificultad, char query){
 }
 
 void menuAyuda (int TABLERO[FIL][COL], int cont, int dificultad){
-    int help; clearScreen();
+    int help, cord; clearScreen(); int x; int y;
     yellowColor();printf("\n费尔南多·比利亚尔 BIENVENIDO AL MENU DE AYUDA 费尔南多·比利亚尔\n");resetColor();
     while (cont < dificultad+2){
+        if (cord > 0){
+            printf("La ultima ayuda fue otorgada en la posicion [%d][%d]\n", x+1, y+1);
+        }
+        mostrarSudoku(TABLERO);
         printf("\nAyudas otorgadas: %d / %d\n", cont, dificultad+2);
         printf("Requiere ayuda o desea salir del menu\n");
         printf("Responda con ");greenColor();printf("[1]");resetColor();printf(" o ");
@@ -226,12 +222,13 @@ void menuAyuda (int TABLERO[FIL][COL], int cont, int dificultad){
         scanf("%d", &help);
         if (help == 1){
             cont += 1;
-            posAyudaRandom(TABLERO, cont);
+            cord = posAyudaRandom(TABLERO, cont);
+            x = cord / 10; y = cord % 10;
+            clearScreen();
             if (comprobarVictoria(TABLERO) == 0){
                 menuBienvenida(TABLERO, cont, dificultad);
                 break;
             }
-            mostrarSudoku(TABLERO);
         }
         else {
             menuPrincipal(TABLERO, cont, dificultad);
